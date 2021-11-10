@@ -14,7 +14,7 @@ namespace CI_Uppgift1
 
         }
 
-        public Admin(string title, int salary, string username, string password, bool isadmin)
+        public Admin(string title, int salary, string username, string password, bool isadmin = true)
         {
             this.Title = title;
             this.Salary = salary;
