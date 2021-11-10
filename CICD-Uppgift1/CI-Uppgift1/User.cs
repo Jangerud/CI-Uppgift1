@@ -9,6 +9,11 @@ namespace CI_Uppgift1
 
         public bool IsAdmin { get; set; }
 
+        public User()
+        {
+
+        }
+
         public User(string title, int salary, string username, string password, bool isadmin)
         {
             this.Title = title;
