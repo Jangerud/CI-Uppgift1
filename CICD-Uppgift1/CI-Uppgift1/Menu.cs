@@ -5,18 +5,43 @@ namespace CI_Uppgift1
 {
     public class Menu
     {
+        /// <summary>
+        /// Instance variable <c>_menuOptions</c> represents the menu options.
+        /// </summary>
         private readonly List<string> _menuOptions;
+
+        /// <summary>
+        /// Instance variable <c>_choice</c> represents the users menu choice.
+        /// </summary>
         private int _choice;
+
+        /// <summary>
+        /// The constructor initializes the new Menu with the
+        /// <paramref name="menuOptions"/>.
+        /// </summary>
+        /// <param name="menuOptions"></param>
         public Menu(List<string> menuOptions){
             _menuOptions = menuOptions;
         }
 
+        /// <summary>
+        /// The users choice.
+        /// </summary>
+        /// <value>Property <c>Choice</c> represents the users choice from the
+        /// menu.</value>
+        public int Choice {get {return _choice;}}
+
+        /// <summary>
+        /// This method creates the menu.
+        /// </summary>
         public void CreateMenu(){
             PrintMenuOptions();
             CheckInput();
         }
 
-        public int Choice {get {return _choice;}}
+        /// <summary>
+        /// This method prints all menu options.
+        /// </summary>
         private void PrintMenuOptions(){
             for (int i = 0; i < _menuOptions.Count; i++)
             {
@@ -26,6 +51,9 @@ namespace CI_Uppgift1
             Console.Write("> ");
         }
 
+        /// <summary>
+        /// This method checks if the users input is valid.
+        /// </summary>
         private void CheckInput(){
             bool isNumeric;
             int choice;
