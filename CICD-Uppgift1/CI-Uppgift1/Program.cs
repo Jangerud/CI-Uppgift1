@@ -13,6 +13,7 @@ namespace CI_Uppgift1
             //logicClass.CreateUser(jangen);
             //logicClass.CreateUser(admin);
             //logicClass.GetUser(jangen.Username);
+            new Logic().SerializeData();
         }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Text;
+using System.Text.Json;
 
 namespace CI_Uppgift1
 {
@@ -52,6 +53,15 @@ namespace CI_Uppgift1
                 Console.ReadKey();
             }
 
+        }
+
+        public void SerializeData(){
+            var user = new User("test", 12, "user1", "123", false);
+            string fileName = "test.json";
+            string jsonString = JsonSerializer.Serialize(user);
+
+            File.WriteAllText(fileName, jsonString);
+            // System.Console.WriteLine(jsonString);
         }
     }
 }
