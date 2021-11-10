@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Text.Json;
+using System.Collections.Generic;
 
 namespace CI_Uppgift1
 {
@@ -70,13 +71,35 @@ namespace CI_Uppgift1
 
         }
 
-        public void SerializeData(){
+        public void SerializeData()
+        {
             var user = new User("test", 12, "user1", "123", false);
             string fileName = "test.json";
             string jsonString = JsonSerializer.Serialize(user);
 
             File.WriteAllText(fileName, jsonString);
             // System.Console.WriteLine(jsonString);
+        }
+
+        public User DeserializeData(string user)
+        {
+            User userInfo = new();
+            string fileName = $"{user.ToLower()}";
+            string jsonString = File.ReadAllText($"{fileName}.json");
+            if (jsonString != "")
+            {
+                userInfo = JsonSerializer.Deserialize<User>(jsonString);
+            }
+            else
+            {
+                Console.WriteLine("User does not exist! Please try again.");
+                Console.ReadKey();
+            }
+
+            Console.WriteLine($"{userInfo.Salary}, {userInfo.Username}");
+            Console.ReadKey();
+
+            return userInfo;
         }
     }
 }
