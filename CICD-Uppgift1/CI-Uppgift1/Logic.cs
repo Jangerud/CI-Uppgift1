@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 using System.Text.Json;
 using System.Collections.Generic;
+using CI_Uppgift1.Interfaces;
 
 namespace CI_Uppgift1
 {
@@ -11,6 +12,10 @@ namespace CI_Uppgift1
 
         string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
+        /// <summary>
+        /// This method will create a json file with the users.
+        /// </summary>
+        /// <param name="userinfo">This contains the information about the user needed.</param>
         public void CreateUser(User userinfo)
         {
             try
@@ -34,6 +39,10 @@ namespace CI_Uppgift1
 
         }
 
+        /// <summary>
+        /// This method will get the information about the specific user.
+        /// </summary>
+        /// <param name="user">The string username of the user.</param>
         public void GetUser(string user)
         {
             try
@@ -56,35 +65,67 @@ namespace CI_Uppgift1
 
         }
 
-        public void SerializeData()
+        /// <summary>
+        /// This method creates a json file with the users information.
+        /// </summary>
+        /// <param name="list">List of employees.</param>
+        /// <param name="filepath">Filepath to the file.</param>
+        public void SerializeData(List<User> list, string filepath)
         {
-            var user = new User("test", 12, "user1", "123", false);
-            string fileName = "test.json";
-            string jsonString = JsonSerializer.Serialize(user);
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            string jsonString = JsonSerializer.Serialize(list, options);
 
-            File.WriteAllText(fileName, jsonString);
-            // System.Console.WriteLine(jsonString);
+            File.WriteAllText(filepath, jsonString);
         }
 
-        public User DeserializeData(string user)
+        /// <summary>
+        /// DeserializeData(string user) makes it possible to read a json file of a user and returns the appropiate user information as an object.
+        /// </summary>
+        /// <param name="filepath">The filepath.</param>
+        /// <returns>A List of employees.</returns>
+        public List<User> DeserializeData(string filepath)
         {
-            User userInfo = new();
-            string fileName = $"{user.ToLower()}";
-            string jsonString = File.ReadAllText($"{fileName}.json");
-            if (jsonString != "")
+            string jsonString = File.ReadAllText(filepath);
+            var list = JsonSerializer.Deserialize<List<User>>(jsonString);
+
+            return list;
+        }
+
+
+        /// <summary>
+        /// Method that will create a list of employees.
+        /// </summary>
+        /// <param name="userslist">The list of users that needs to be added.</param>
+        /// <returns>A list of employees.</returns>
+        public List<IAccount> CreateEmployeeList(List<User> userslist)
+        {
+            List<IAccount> employeeList = new();
+            foreach (var item in userslist)
             {
-                userInfo = JsonSerializer.Deserialize<User>(jsonString);
-            }
-            else
-            {
-                Console.WriteLine("User does not exist! Please try again.");
-                Console.ReadKey();
+                if (item.IsAdmin)
+                {
+                    employeeList.Add(new Admin(item.Title, item.Salary, item.Username, item.Password, item.IsAdmin));
+                }
+                else
+                {
+                    employeeList.Add(new User(item.Title, item.Salary, item.Username, item.Password, item.IsAdmin));
+                }
+
             }
 
-            Console.WriteLine($"{userInfo.Salary}, {userInfo.Username}");
-            Console.ReadKey();
+            return employeeList;
+        }
 
-            return userInfo;
+
+        /// <summary>
+        /// Method that creates dummy data.
+        /// </summary>
+        /// <returns>Returns the list of dummy data.</returns>
+        public List<User> CreateDummyData()
+        {
+            List<User> users = new() { new User("test", 12000, "user1", "123", false), new User("Admin", 22000, "admin", "admin123", true), new User("Admin", 22000, "administrator", "admin123", true) };
+
+            return users;
         }
     }
 }

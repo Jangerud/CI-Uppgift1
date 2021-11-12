@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CI_Uppgift1
 {
@@ -8,13 +9,10 @@ namespace CI_Uppgift1
 
         static void Main(string[] args)
         {
-            Admin admin = new Admin("Admin", 30000, "admin1", "admin1234", true);
-            User jangen = new User("Peon", 20000, "Johan", "Johan123", false);
-            //logicClass.CreateUser(jangen);
-            //logicClass.CreateUser(admin);
-            //logicClass.GetUser(jangen.Username);
-            //new Logic().SerializeData();
-            logicClass.DeserializeData("test");
+            List<User> temp = new Logic().CreateDummyData();
+            new Logic().SerializeData(temp, "testing.json");
+            List<User> secondTemp = new Logic().DeserializeData("testing.json");
+            new Logic().CreateEmployeeList(secondTemp);
         }
     }
 }
