@@ -16,18 +16,10 @@ namespace CI_Uppgift1
         /// <returns></returns>
         string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-<<<<<<< HEAD
-
-        /// <summary>
-        /// This method will create a new user(text document) with the associated employees username. 
-        /// </summary>
-        /// <param name="userinfo">userinfo is all the relevant variables that the User class needs to be created.</param>
-=======
         /// <summary>
         /// This method will create a json file with the users.
         /// </summary>
         /// <param name="userinfo">This contains the information about the user needed.</param>
->>>>>>> json_serialize_and_deserialize
         public void CreateUser(User userinfo)
         {
             try
@@ -53,15 +45,9 @@ namespace CI_Uppgift1
         }
 
         /// <summary>
-<<<<<<< HEAD
-        /// This method is used to get the information for a specific user that is declared by the variable 'user'.
-        /// </summary>
-        /// <param name="user">String value that determines which users info should be returned.</param>
-=======
         /// This method will get the information about the specific user.
         /// </summary>
         /// <param name="user">The string username of the user.</param>
->>>>>>> json_serialize_and_deserialize
         public void GetUser(string user)
         {
             try
