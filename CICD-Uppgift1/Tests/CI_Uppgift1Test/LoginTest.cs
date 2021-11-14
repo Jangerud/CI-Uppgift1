@@ -10,11 +10,12 @@ namespace CI_Uppgift1Test
     public class LoginTest
     {
         private Logic logic;
-        private string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        private string filePath;
 
         [TestInitialize]
         public void TestInitialize(){
             this.logic = new Logic();
+            this.filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             logic.SerializeData(logic.CreateDummyData(), filePath + "/test.json");
         }
 
@@ -31,17 +32,17 @@ namespace CI_Uppgift1Test
 
         [TestMethod]
         public void Login_UserDoesExist_ReturnTrue(){
-            Assert.IsTrue(new Logic().Login("user1", "123"));
+            Assert.IsTrue(logic.Login("user1", "123"));
         }
 
         [TestMethod]
         public void Login_WrongPassword_ReturnFalse(){
-            Assert.IsFalse(new Logic().Login("user1", "abc"));
+            Assert.IsFalse(logic.Login("user1", "abc"));
         }
 
         [TestMethod]
         public void Login_CorrectPassword_ReturnTrue(){
-            Assert.IsTrue(new Logic().Login("user1", "123"));
+            Assert.IsTrue(logic.Login("user1", "123"));
         }
     }
 }
