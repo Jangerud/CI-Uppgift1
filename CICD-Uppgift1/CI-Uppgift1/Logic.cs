@@ -133,5 +133,31 @@ namespace CI_Uppgift1
 
             return users;
         }
+
+        public bool Login(string username, string password){
+            List<User> tmp = DeserializeData(filePath + "/test.json");
+            List<IAccount> users = CreateEmployeeList(tmp);
+            IAccount user = null;
+
+            bool UsernameExists(){
+                for (int i = 0; i < users.Count; i++)
+                {
+                    if (users[i].Username == username){
+                        user = users[i];
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            if (!UsernameExists()) return false;
+
+            bool CheckPassword(){
+                return user.Password == password;
+            }
+
+            if (!CheckPassword()) return false;
+            return true;
+        }
     }
 }
