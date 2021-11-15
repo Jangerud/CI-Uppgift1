@@ -168,5 +168,27 @@ namespace CI_Uppgift1
             if (!CheckPassword()) return false;
             return true;
         }
+
+        public bool RemoveAccount(string username, string password){
+            List<User> tmp = DeserializeData(filePath + "/test.json");
+            List<IAccount> users = CreateEmployeeList(tmp);
+            IAccount user = null;
+
+            bool CheckUser(){
+                for (int i = 0; i < users.Count; i++)
+                {
+                    if (users[i].Username == username && users[i].GetType() != typeof(Admin)){
+                        user = users[i];
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            if(!CheckUser()) return false;
+
+            if(user.Password != password) return false;
+            return true;
+        }
     }
 }
