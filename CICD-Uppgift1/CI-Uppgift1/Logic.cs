@@ -188,7 +188,8 @@ namespace CI_Uppgift1
             bool CheckUser(){
                 for (int i = 0; i < users.Count; i++)
                 {
-                    if (users[i].Username == username && users[i].GetType() != typeof(Admin)){
+                    if (users[i].Username == username &&
+                        users[i].GetType() != typeof(Admin)){
                         user = users[i];
                         return true;
                     }
