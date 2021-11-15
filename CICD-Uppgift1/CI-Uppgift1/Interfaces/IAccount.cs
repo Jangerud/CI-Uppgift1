@@ -7,5 +7,7 @@ namespace CI_Uppgift1.Interfaces
         public string Username { get; set; }
         public string Password { get; set; }
 
+        public bool IsAdmin {get; set; }
+
     }
 }
