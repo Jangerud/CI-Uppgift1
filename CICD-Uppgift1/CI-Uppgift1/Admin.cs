@@ -33,7 +33,14 @@ namespace CI_Uppgift1
         }
 
 
-
+        /// <summary>
+        /// Method used to create a new user and add it to the users file.
+        /// </summary>
+        /// <param name="title">Title of the user</param>
+        /// <param name="salary">Salary of the user</param>
+        /// <param name="username">Username of the user</param>
+        /// <param name="password">Password of the user</param>
+        /// <returns>True if the user already exists otherwise it will return false.</returns>
         public bool CreateUser(string title, int salary, string username, string password)
         {
             List<User> tmp = logic.DeserializeData(filePath + "/test.json");
