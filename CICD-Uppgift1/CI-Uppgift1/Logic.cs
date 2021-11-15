@@ -169,6 +169,17 @@ namespace CI_Uppgift1
             return true;
         }
 
+        /// <summary>
+        /// Removes an account if it's not an admin account and the user exists
+        /// and the password is correct-
+        /// </summary>
+        /// <param name="username"><c>username</c> is the username of the
+        /// account that should be removed.</param>
+        /// <param name="password"><c>password</c> is the password for the
+        /// account that should be removed.</param>
+        /// <returns>True if the account can be removed. False if the account is
+        /// an admin account, the user does not exist or the password is wrong.
+        /// </returns>
         public bool RemoveAccount(string username, string password){
             List<User> tmp = DeserializeData(filePath + "/test.json");
             List<IAccount> users = CreateEmployeeList(tmp);
