@@ -9,12 +9,13 @@ namespace CI_Uppgift1
 
         static void Main(string[] args)
         {
-            string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            new Setup().Start();
+            // string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-            List<User> temp = new Logic().CreateDummyData();
-            new Logic().SerializeData(temp, filePath + "/test.json");
-            List<User> secondTemp = new Logic().DeserializeData(filePath + "/test.json");
-            new Logic().CreateEmployeeList(secondTemp);
+            // List<User> temp = new Logic().CreateDummyData();
+            // new Logic().SerializeData(temp, filePath + "/test.json");
+            // List<User> secondTemp = new Logic().DeserializeData(filePath + "/test.json");
+            // new Logic().CreateEmployeeList(secondTemp);
         }
     }
 }

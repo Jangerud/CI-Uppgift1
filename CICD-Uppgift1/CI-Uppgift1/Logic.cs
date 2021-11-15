@@ -14,7 +14,7 @@ namespace CI_Uppgift1
         /// String variable that is made to keep the filepath for the employees that are created.
         /// </summary>
         /// <returns></returns>
-        string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        public string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
         /// <summary>
         /// This method will create a json file with the users.
@@ -144,7 +144,7 @@ namespace CI_Uppgift1
         /// <returns>True if the username and password is correct. False if the
         /// username doesn't exist or the password is incorrect.</returns>
         public bool Login(string username, string password){
-            List<User> tmp = DeserializeData(filePath + "/test.json");
+            List<User> tmp = DeserializeData(filePath + "/users.json");
             List<IAccount> users = CreateEmployeeList(tmp);
             IAccount user = null;
 
@@ -181,7 +181,7 @@ namespace CI_Uppgift1
         /// an admin account, the user does not exist or the password is wrong.
         /// </returns>
         public bool RemoveAccount(string username, string password){
-            List<User> tmp = DeserializeData(filePath + "/test.json");
+            List<User> tmp = DeserializeData(filePath + "/users.json");
             List<IAccount> users = CreateEmployeeList(tmp);
             IAccount user = null;
 
