@@ -21,14 +21,14 @@ namespace CI_Uppgift1Test
             this.admin = new Admin();
             this.logic = new Logic();
             this.filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            logic.SerializeData(logic.CreateDummyData(), filePath + "/test.json");
+            logic.SerializeData(logic.CreateDummyData(), filePath + "/users.json");
         }
 
         [TestCleanup]
         public void TestCleanup()
         {
             this.logic = null;
-            File.Delete(filePath + "/test.json");
+            File.Delete(filePath + "/users.json");
         }
 
         [TestMethod]

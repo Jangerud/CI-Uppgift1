@@ -43,7 +43,7 @@ namespace CI_Uppgift1
         /// <returns>True if the user already exists otherwise it will return false.</returns>
         public bool CreateUser(string title, int salary, string username, string password)
         {
-            List<User> tmp = logic.DeserializeData(filePath + "/test.json");
+            List<User> tmp = logic.DeserializeData(filePath + "/users.json");
 
             for (int i = 0; i < tmp.Count; i++)
             {
@@ -53,7 +53,7 @@ namespace CI_Uppgift1
                 }
             }
             tmp.Add(new User(title, salary, username, password));
-            logic.SerializeData(tmp, filePath + "/test.json");
+            logic.SerializeData(tmp, filePath + "/users.json");
             return false;
         }
     }
