@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using CI_Uppgift1.Interfaces;
 
 namespace CI_Uppgift1
 {
     public class Setup
     {
+        private IAccount _user;
         public void Start(){
             FirstTimeRun();
             LoginScreen();
@@ -19,6 +22,9 @@ namespace CI_Uppgift1
         }
 
         private void LoginScreen(){
+            Logic logic = new();
+            List<User> tmp = logic.DeserializeData(logic.filePath + "/users.json");
+            List<IAccount> users = new Logic().CreateEmployeeList(tmp);
             string username;
             string password;
             bool successfullLogin;
@@ -40,6 +46,21 @@ namespace CI_Uppgift1
                         ", please try again.");
                     Console.ReadKey();
                 }
+                else
+                {
+                    void GetUser(){
+                        for (int i = 0; i < users.Count; i++)
+                        {
+                            if (users[i].Username == username)
+                            {
+                                _user = users[i];
+                                return;
+                            }
+                        }
+                    }
+                    GetUser();
+                }
+                System.Console.WriteLine(_user.Username);
             } while (!successfullLogin);
         }
     }
