@@ -134,6 +134,15 @@ namespace CI_Uppgift1
             return users;
         }
 
+        /// <summary>
+        /// Checks whether the user can log in or not.
+        /// </summary>
+        /// <param name="username"><c>username</c> is the username that the user
+        /// entered.</param>
+        /// <param name="password"><c>password</c> is the password that the user
+        /// entered.</param>
+        /// <returns>True if the username and password is correct. False if the
+        /// username doesn't exist or the password is incorrect.</returns>
         public bool Login(string username, string password){
             List<User> tmp = DeserializeData(filePath + "/test.json");
             List<IAccount> users = CreateEmployeeList(tmp);
