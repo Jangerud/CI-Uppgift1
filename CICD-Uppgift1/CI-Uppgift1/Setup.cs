@@ -8,23 +8,27 @@ namespace CI_Uppgift1
     public class Setup
     {
         private IAccount _user;
-        public void Start(){
+        private readonly List<User> _users = new Logic().DeserializeData(
+            new Logic().filePath + "/users.json");
+        public void Start()
+        {
             FirstTimeRun();
             LoginScreen();
+            UserMenu();
         }
 
-        private void FirstTimeRun(){
+        private void FirstTimeRun()
+        {
             Logic logic = new();
-            if(!File.Exists(logic.filePath + "/users.json")){
+            if (!File.Exists(logic.filePath + "/users.json"))
+            {
                 logic.SerializeData(
                     logic.CreateDummyData(), logic.filePath + "/users.json");
             }
         }
 
-        private void LoginScreen(){
-            Logic logic = new();
-            List<User> tmp = logic.DeserializeData(logic.filePath + "/users.json");
-            List<IAccount> users = new Logic().CreateEmployeeList(tmp);
+        private void LoginScreen()
+        {
             string username;
             string password;
             bool successfullLogin;
@@ -39,29 +43,99 @@ namespace CI_Uppgift1
                 password = Console.ReadLine();
 
                 successfullLogin = new Logic().Login(username, password);
-
                 if (!successfullLogin)
                 {
-                    Console.WriteLine("The username or password is not correct"+
-                        ", please try again.");
+                    Console.WriteLine("The username or password is not correct"
+                        + ", please try again.");
                     Console.ReadKey();
                 }
                 else
                 {
-                    void GetUser(){
-                        for (int i = 0; i < users.Count; i++)
+                    void GetUser()
+                    {
+                        for (int i = 0; i < _users.Count; i++)
                         {
-                            if (users[i].Username == username)
+                            if (_users[i].Username == username)
                             {
-                                _user = users[i];
+                                _user = _users[i];
+                                Console.ReadKey();
                                 return;
                             }
                         }
                     }
                     GetUser();
                 }
-                System.Console.WriteLine(_user.Username);
             } while (!successfullLogin);
+        }
+
+        private void UserMenu()
+        {
+            List<string> menuOptions = new()
+            {
+                "See current salary.",
+                "See role in the company",
+                "Remove account"
+            };
+
+            Console.Clear();
+            Menu menu = new(menuOptions);
+            menu.CreateMenu();
+
+            switch (menu.Choice)
+            {
+                case 1:
+                    Console.WriteLine($"Current salary: {_user.Salary}");
+                    Console.ReadKey();
+                    UserMenu();
+                    break;
+                case 2:
+                    Console.WriteLine($"Role: {_user.Title}");
+                    Console.ReadKey();
+                    UserMenu();
+                    break;
+                case 3:
+                    RemoveUserMenu();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void RemoveUserMenu()
+        {
+            List<string> menuOptions = new() { "yes", "no" };
+            Console.Clear();
+            Console.WriteLine("Do you really want to remove this account?");
+            Menu menu = new(menuOptions);
+            menu.CreateMenu();
+
+            switch (menu.Choice)
+            {
+                case 1:
+                    RemoveUser();
+                    Start();
+                    break;
+                case 2:
+                    UserMenu();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void RemoveUser()
+        {
+            bool isRemoveable = new Logic().RemoveAccount(
+                _user.Username, _user.Password);
+            if (isRemoveable)
+            {
+                _users.Remove((User)_user);
+                new Logic().SerializeData(
+                    _users, new Logic().filePath + "/users.json");
+            }
+            System.Console.WriteLine(_user.Username, _user.Password);
+            Console.WriteLine("Account successfully removed.");
+            Console.ReadKey();
         }
     }
 }
