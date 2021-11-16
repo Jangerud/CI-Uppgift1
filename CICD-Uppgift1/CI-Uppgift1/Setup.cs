@@ -8,13 +8,12 @@ namespace CI_Uppgift1
     public class Setup
     {
         private IAccount _user;
-        private readonly List<User> _users = new Logic().DeserializeData(
-            new Logic().filePath + "/users.json");
+        private List<User> _users;
         public void Start()
         {
             FirstTimeRun();
             LoginScreen();
-            UserMenu();
+            IsAdmin();
         }
 
         private void FirstTimeRun()
@@ -24,6 +23,8 @@ namespace CI_Uppgift1
             {
                 logic.SerializeData(
                     logic.CreateDummyData(), logic.filePath + "/users.json");
+                _users = new Logic().DeserializeData(new Logic().filePath +
+                    "/users.json");
             }
         }
 
@@ -112,7 +113,7 @@ namespace CI_Uppgift1
             switch (menu.Choice)
             {
                 case 1:
-                    RemoveUser();
+                    RemoveUser(_user.Username, _user.Password);
                     Start();
                     break;
                 case 2:
@@ -123,19 +124,97 @@ namespace CI_Uppgift1
             }
         }
 
-        private void RemoveUser()
+        private void RemoveUser(string username, string password)
         {
-            bool isRemoveable = new Logic().RemoveAccount(
-                _user.Username, _user.Password);
+            bool isRemoveable = new Logic().RemoveAccount(username, password);
             if (isRemoveable)
             {
                 _users.Remove((User)_user);
                 new Logic().SerializeData(
                     _users, new Logic().filePath + "/users.json");
             }
-            System.Console.WriteLine(_user.Username, _user.Password);
             Console.WriteLine("Account successfully removed.");
             Console.ReadKey();
+        }
+        private void IsAdmin()
+        {
+            if (_user.IsAdmin)
+            {
+                AdminMenu();
+            }
+            else
+            {
+                UserMenu();
+            }
+        }
+
+        private void AdminMenu()
+        {
+            Admin admin = new();
+            bool active = true;
+            int salary = 0;
+            string title = "";
+            for (int i = 0; i < _users.Count; i++)
+            {
+                if (_users[i].Username == _user.Username)
+                {
+                    salary = _users[i].Salary;
+                    title = _users[i].Title;
+                }
+            }
+            List<string> options = new List<string> { "Check Salary", "Check Role", "Check Active Users", "Create New User", "Remove Account", "Logout" };
+            do
+            {
+                Menu menu = new(options);
+                menu.CreateMenu();
+
+                switch (menu.Choice)
+                {
+                    case 1:
+                        Console.WriteLine($"Your current salary is: {salary}");
+                        break;
+                    case 2:
+                        Console.WriteLine($"Your title in the company: {title}");
+                        break;
+                    case 3:
+                        foreach (var item in _users)
+                        {
+                            Console.WriteLine($"Username: {item.Username}");
+                            Console.WriteLine($"Password: {item.Password}");
+                            Console.WriteLine(" ");
+                        }
+                        break;
+                    case 4:
+                        Console.WriteLine("Type in the following:");
+                        Console.WriteLine("Username: ");
+                        string newUsername = Console.ReadLine();
+                        Console.WriteLine("Password: ");
+                        string newPassword = Console.ReadLine();
+                        Console.WriteLine("Title: ");
+                        string newTitle = Console.ReadLine();
+                        Console.WriteLine("Salary: ");
+                        int.TryParse(Console.ReadLine(), out int newSalary);
+                        admin.CreateUser(newTitle, newSalary, newUsername, newPassword);
+                        break;
+                    case 5:
+                        Console.WriteLine("Type in the username and password of the account you want to remove:");
+                        Console.WriteLine("Username: ");
+                        string user = Console.ReadLine();
+                        Console.WriteLine("Password: ");
+                        string pass = Console.ReadLine();
+                        if (new Logic().RemoveAccount(user, pass))
+                        {
+                            RemoveUser(user, pass);
+                            Console.WriteLine("User has been removed!");
+                        }
+                        Console.WriteLine("Please check if the username or password was correct!");
+                        break;
+                    case 6:
+                        Console.WriteLine("You've been logged out!");
+                        active = false;
+                        break;
+                }
+            } while (active);
         }
     }
 }
