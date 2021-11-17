@@ -25,7 +25,10 @@ namespace CI_Uppgift1
                     logic.CreateDummyData(), logic.filePath + "/users.json");
                 _users = new Logic().DeserializeData(new Logic().filePath +
                     "/users.json");
+                return;
             }
+            _users = new Logic().DeserializeData(new Logic().filePath +
+                "/users.json");
         }
 
         private void LoginScreen()
@@ -113,7 +116,7 @@ namespace CI_Uppgift1
             switch (menu.Choice)
             {
                 case 1:
-                    RemoveUser(_user.Username, _user.Password);
+                    RemoveUser(_user);
                     Start();
                     break;
                 case 2:
@@ -124,12 +127,13 @@ namespace CI_Uppgift1
             }
         }
 
-        private void RemoveUser(string username, string password)
+        private void RemoveUser(IAccount user)
         {
-            bool isRemoveable = new Logic().RemoveAccount(username, password);
+            bool isRemoveable = new Logic().RemoveAccount(
+                user.Username, user.Password);
             if (isRemoveable)
             {
-                _users.Remove((User)_user);
+                _users.Remove((User)user);
                 new Logic().SerializeData(
                     _users, new Logic().filePath + "/users.json");
             }
@@ -204,7 +208,17 @@ namespace CI_Uppgift1
                         string pass = Console.ReadLine();
                         if (new Logic().RemoveAccount(user, pass))
                         {
-                            RemoveUser(user, pass);
+                            IAccount userToRemove;
+                            for (int i = 0; i < _users.Count; i++)
+                            {
+                                if (_users[i].Username == user)
+                                {
+                                    userToRemove = _users[i];
+                                    Console.ReadKey();
+                                    RemoveUser(userToRemove);
+                                    return;
+                                }
+                            }
                             Console.WriteLine("User has been removed!");
                         }
                         Console.WriteLine("Please check if the username or password was correct!");
