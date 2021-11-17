@@ -16,6 +16,11 @@ namespace CI_Uppgift1
             IsAdmin();
         }
 
+        /// <summary>
+        /// Creates dummy data and stores it in a new json file. If it is not
+        /// the first time the users in the file will be added to the
+        /// <paramref name="_users"/> list.
+        /// </summary>
         private void FirstTimeRun()
         {
             Logic logic = new();
@@ -31,6 +36,9 @@ namespace CI_Uppgift1
                 "/users.json");
         }
 
+        /// <summary>
+        /// Prints the login screen and lets the user login.
+        /// </summary>
         private void LoginScreen()
         {
             string username;
@@ -72,6 +80,9 @@ namespace CI_Uppgift1
             } while (!successfullLogin);
         }
 
+        /// <summary>
+        /// If the account is a regular user, then this menu will be displayed.
+        /// </summary>
         private void UserMenu()
         {
             List<string> menuOptions = new()
@@ -105,6 +116,10 @@ namespace CI_Uppgift1
             }
         }
 
+        /// <summary>
+        /// Prints the remove user menu to check if the user really wants to
+        /// remove it's account.
+        /// </summary>
         private void RemoveUserMenu()
         {
             List<string> menuOptions = new() { "yes", "no" };
@@ -127,6 +142,11 @@ namespace CI_Uppgift1
             }
         }
 
+        /// <summary>
+        /// Removes the user.
+        /// </summary>
+        /// <param name="user"><c>user</c> is the user that should be removed.
+        /// </param>
         private void RemoveUser(IAccount user)
         {
             bool isRemoveable = new Logic().RemoveAccount(
@@ -140,6 +160,10 @@ namespace CI_Uppgift1
             Console.WriteLine("Account successfully removed.");
             Console.ReadKey();
         }
+
+        /// <summary>
+        /// Checks if the user is an admin and displays the propper menu.
+        /// </summary>
         private void IsAdmin()
         {
             if (_user.IsAdmin)
@@ -152,6 +176,9 @@ namespace CI_Uppgift1
             }
         }
 
+        /// <summary>
+        /// Displays the admin menu.
+        /// </summary>
         private void AdminMenu()
         {
             Admin admin = new();
