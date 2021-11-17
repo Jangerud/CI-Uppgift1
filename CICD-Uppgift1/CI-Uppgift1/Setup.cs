@@ -7,8 +7,19 @@ namespace CI_Uppgift1
 {
     public class Setup
     {
+        /// <summary>
+        /// Property to store a specific user.
+        /// </summary>
         private IAccount _user;
+        /// <summary>
+        /// Property to store a list of users.
+        /// </summary>
         private List<User> _users;
+
+        /// <summary>
+        /// Method that handles the program, it will first run FirstTimeRun to fill data and create the file. Then run the LoginScreen. 
+        /// Then depending on the users priviledges, it will start the corresponding menu.
+        /// </summary>
         public void Start()
         {
             FirstTimeRun();
@@ -70,7 +81,6 @@ namespace CI_Uppgift1
                             if (_users[i].Username == username)
                             {
                                 _user = _users[i];
-                                Console.ReadKey();
                                 return;
                             }
                         }
@@ -196,6 +206,7 @@ namespace CI_Uppgift1
             List<string> options = new List<string> { "Check Salary", "Check Role", "Check Active Users", "Create New User", "Remove Account", "Logout" };
             do
             {
+                Console.Clear();
                 Menu menu = new(options);
                 menu.CreateMenu();
 
@@ -255,6 +266,7 @@ namespace CI_Uppgift1
                         active = false;
                         break;
                 }
+                Console.ReadKey();
             } while (active);
         }
     }
