@@ -17,34 +17,6 @@ namespace CI_Uppgift1
         public string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
         /// <summary>
-        /// This method will create a json file with the users.
-        /// </summary>
-        /// <param name="userinfo">This contains the information about the user needed.</param>
-        public void CreateUser(User userinfo)
-        {
-            try
-            {
-                // Create the file, or overwrite if the file exists.
-                using (FileStream fs = File.Create($"{filePath}/{userinfo.Username}"))
-                {
-                    // Declaring 'info' with all the user information from the variable 'userinfo'.
-                    byte[] info = new UTF8Encoding(true).GetBytes($"{userinfo.Title}, {userinfo.Salary}, {userinfo.Username}, {userinfo.Password}, {userinfo.IsAdmin}");
-                    // Add some information to the file.
-                    fs.Write(info, 0, info.Length);
-
-                    Console.WriteLine("User created successfully!");
-                    Console.ReadKey();
-                }
-            }
-
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-
-        }
-
-        /// <summary>
         /// This method will get the information about the specific user.
         /// </summary>
         /// <param name="user">The string username of the user.</param>
@@ -143,15 +115,18 @@ namespace CI_Uppgift1
         /// entered.</param>
         /// <returns>True if the username and password is correct. False if the
         /// username doesn't exist or the password is incorrect.</returns>
-        public bool Login(string username, string password){
+        public bool Login(string username, string password)
+        {
             List<User> tmp = DeserializeData(filePath + "/users.json");
             List<IAccount> users = CreateEmployeeList(tmp);
             IAccount user = null;
 
-            bool UsernameExists(){
+            bool UsernameExists()
+            {
                 for (int i = 0; i < users.Count; i++)
                 {
-                    if (users[i].Username == username){
+                    if (users[i].Username == username)
+                    {
                         user = users[i];
                         return true;
                     }
@@ -161,7 +136,8 @@ namespace CI_Uppgift1
 
             if (!UsernameExists()) return false;
 
-            bool CheckPassword(){
+            bool CheckPassword()
+            {
                 return user.Password == password;
             }
 
@@ -180,16 +156,19 @@ namespace CI_Uppgift1
         /// <returns>True if the account can be removed. False if the account is
         /// an admin account, the user does not exist or the password is wrong.
         /// </returns>
-        public bool RemoveAccount(string username, string password){
+        public bool RemoveAccount(string username, string password)
+        {
             List<User> tmp = DeserializeData(filePath + "/users.json");
             List<IAccount> users = CreateEmployeeList(tmp);
             IAccount user = null;
 
-            bool CheckUser(){
+            bool CheckUser()
+            {
                 for (int i = 0; i < users.Count; i++)
                 {
                     if (users[i].Username == username &&
-                        users[i].GetType() != typeof(Admin)){
+                        users[i].GetType() != typeof(Admin))
+                    {
                         user = users[i];
                         return true;
                     }
@@ -197,9 +176,9 @@ namespace CI_Uppgift1
                 return false;
             }
 
-            if(!CheckUser()) return false;
+            if (!CheckUser()) return false;
 
-            if(user.Password != password) return false;
+            if (user.Password != password) return false;
             return true;
         }
     }
