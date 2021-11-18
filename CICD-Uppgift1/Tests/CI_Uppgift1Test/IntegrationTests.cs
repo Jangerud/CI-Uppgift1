@@ -30,11 +30,20 @@ namespace CI_Uppgift1Test
         }
 
         [TestMethod]
-        public void Integration_AdminCreateUser_ReturnsFalse()
+        public void Integration_AdminCreateUser_ReturnsTrue()
         {
             string username = "admin", password = "admin123";
             bool loginSuccessful = logic.Login(username, password);
-            Assert.IsFalse(admin.CreateUser("test", 12000, "user2", "123"));
+            admin.CreateUser("test", 12000, "user2", "123");
+            Assert.IsTrue(logic.RemoveAccount("user2", "123"));
+        }
+
+        [TestMethod]
+        public void Integration_Userflow_ReturnsTrue()
+        {
+            string username = "user1", password = "123";
+            bool loginSuccessful = logic.Login(username, password);
+            Assert.IsTrue(logic.RemoveAccount("user1", "123"));
         }
     }
 }
