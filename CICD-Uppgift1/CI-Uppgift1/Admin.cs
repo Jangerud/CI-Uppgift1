@@ -4,6 +4,9 @@ using CI_Uppgift1.Interfaces;
 
 namespace CI_Uppgift1
 {
+    /// <summary>
+    /// Constructor of the Admin class.
+    /// </summary>
     public class Admin : Interfaces.IAccount
     {
         new Logic logic = new();

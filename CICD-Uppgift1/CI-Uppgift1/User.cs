@@ -1,5 +1,8 @@
 namespace CI_Uppgift1
 {
+    /// <summary>
+    /// Constructor of the User class.
+    /// </summary>
     public class User : Interfaces.IAccount
     {
         public string Title { get; set; }
