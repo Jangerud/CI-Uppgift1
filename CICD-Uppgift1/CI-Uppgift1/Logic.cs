@@ -11,10 +11,12 @@ namespace CI_Uppgift1
     {
 
         /// <summary>
-        /// String variable that is made to keep the filepath for the employees that are created.
+        /// String variable that is made to keep the filepath for the employees
+        /// that are created.
         /// </summary>
         /// <returns></returns>
-        public string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        public string filePath = Environment.GetFolderPath(
+            Environment.SpecialFolder.MyDocuments);
 
         /// <summary>
         /// This method will get the information about the specific user.
@@ -24,7 +26,8 @@ namespace CI_Uppgift1
         {
             try
             {
-                // Checking which document to open, by putting together the filepath with the username.
+                // Checking which document to open, by putting together the
+                // filepath with the username.
                 using (StreamReader sr = File.OpenText($"{filePath}/{user}"))
                 {
                     string s = "";
@@ -57,7 +60,8 @@ namespace CI_Uppgift1
         }
 
         /// <summary>
-        /// DeserializeData(string user) makes it possible to read a json file of a user and returns the appropiate user information as an object.
+        /// DeserializeData(string user) makes it possible to read a json file
+        /// of a user and returns the appropiate user information as an object.
         /// </summary>
         /// <param name="filepath">The filepath.</param>
         /// <returns>A List of employees.</returns>
@@ -73,7 +77,8 @@ namespace CI_Uppgift1
         /// <summary>
         /// Method that will create a list of employees.
         /// </summary>
-        /// <param name="userslist">The list of users that needs to be added.</param>
+        /// <param name="userslist">The list of users that needs to be added.
+        /// </param>
         /// <returns>A list of employees.</returns>
         public List<IAccount> CreateEmployeeList(List<User> userslist)
         {
@@ -82,11 +87,13 @@ namespace CI_Uppgift1
             {
                 if (item.IsAdmin)
                 {
-                    employeeList.Add(new Admin(item.Title, item.Salary, item.Username, item.Password, item.IsAdmin));
+                    employeeList.Add(new Admin(item.Title, item.Salary,
+                        item.Username, item.Password, item.IsAdmin));
                 }
                 else
                 {
-                    employeeList.Add(new User(item.Title, item.Salary, item.Username, item.Password, item.IsAdmin));
+                    employeeList.Add(new User(item.Title, item.Salary,
+                        item.Username, item.Password, item.IsAdmin));
                 }
 
             }
@@ -101,7 +108,9 @@ namespace CI_Uppgift1
         /// <returns>Returns the list of dummy data.</returns>
         public List<User> CreateDummyData()
         {
-            List<User> users = new() { new User("test", 12000, "user1", "123", false), new User("Admin", 22000, "admin1", "admin1234", true) };
+            List<User> users = new() {
+                new User("test", 12000, "user1", "123", false),
+                new User("Admin", 22000, "admin1", "admin1234", true) };
 
             return users;
         }

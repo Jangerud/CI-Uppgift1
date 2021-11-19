@@ -17,8 +17,10 @@ namespace CI_Uppgift1
         private List<User> _users;
 
         /// <summary>
-        /// Method that handles the program, it will first run FirstTimeRun to fill data and create the file. Then run the LoginScreen. 
-        /// Then depending on the users priviledges, it will start the corresponding menu.
+        /// Method that handles the program, it will first run FirstTimeRun to
+        /// fill data and create the file. Then run the LoginScreen.
+        /// Then depending on the users priviledges, it will start the
+        /// corresponding menu.
         /// </summary>
         public void Start()
         {
@@ -203,7 +205,9 @@ namespace CI_Uppgift1
                     title = _users[i].Title;
                 }
             }
-            List<string> options = new List<string> { "Check Salary", "Check Role", "Check Active Users", "Create New User", "Remove Account", "Logout" };
+            List<string> options = new List<string> {
+                "Check Salary", "Check Role", "Check Active Users",
+                "Create New User", "Remove Account", "Logout" };
             do
             {
                 Console.Clear();
@@ -216,7 +220,8 @@ namespace CI_Uppgift1
                         Console.WriteLine($"Your current salary is: {salary}");
                         break;
                     case 2:
-                        Console.WriteLine($"Your title in the company: {title}");
+                        Console.WriteLine(
+                            $"Your title in the company: {title}");
                         break;
                     case 3:
                         foreach (var item in _users)
@@ -236,10 +241,12 @@ namespace CI_Uppgift1
                         string newTitle = Console.ReadLine();
                         Console.WriteLine("Salary: ");
                         int.TryParse(Console.ReadLine(), out int newSalary);
-                        admin.CreateUser(newTitle, newSalary, newUsername, newPassword);
+                        admin.CreateUser(
+                            newTitle, newSalary, newUsername, newPassword);
                         break;
                     case 5:
-                        Console.WriteLine("Type in the username and password of the account you want to remove:");
+                        Console.WriteLine("Type in the username and password " +
+                            "of the account you want to remove:");
                         Console.WriteLine("Username: ");
                         string user = Console.ReadLine();
                         Console.WriteLine("Password: ");
@@ -259,7 +266,8 @@ namespace CI_Uppgift1
                             }
                             Console.WriteLine("User has been removed!");
                         }
-                        Console.WriteLine("Please check if the username or password was correct!");
+                        Console.WriteLine("Please check if the username " +
+                            "or password was correct!");
                         break;
                     case 6:
                         Console.WriteLine("You've been logged out!");
