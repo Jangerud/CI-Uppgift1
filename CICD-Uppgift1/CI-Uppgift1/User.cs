@@ -1,5 +1,8 @@
 namespace CI_Uppgift1
 {
+    /// <summary>
+    /// Constructor of the User class.
+    /// </summary>
     public class User : Interfaces.IAccount
     {
         public string Title { get; set; }
@@ -14,7 +17,8 @@ namespace CI_Uppgift1
 
         }
 
-        public User(string title, int salary, string username, string password, bool isadmin = false)
+        public User(string title, int salary, string username, string password,
+            bool isadmin = false)
         {
             this.Title = title;
             this.Salary = salary;
@@ -22,10 +26,5 @@ namespace CI_Uppgift1
             this.Password = password;
             this.IsAdmin = isadmin;
         }
-
-
     }
-
-
-
 }

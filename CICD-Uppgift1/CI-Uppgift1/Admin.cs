@@ -4,11 +4,15 @@ using CI_Uppgift1.Interfaces;
 
 namespace CI_Uppgift1
 {
+    /// <summary>
+    /// Constructor of the Admin class.
+    /// </summary>
     public class Admin : Interfaces.IAccount
     {
         new Logic logic = new();
 
-        string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        string filePath = Environment.GetFolderPath(
+            Environment.SpecialFolder.MyDocuments);
 
         public string Title { get; set; }
         public int Salary { get; set; }
@@ -23,7 +27,8 @@ namespace CI_Uppgift1
 
         }
 
-        public Admin(string title, int salary, string username, string password, bool isadmin = true)
+        public Admin(string title, int salary, string username, string password,
+            bool isadmin = true)
         {
             this.Title = title;
             this.Salary = salary;
@@ -40,8 +45,10 @@ namespace CI_Uppgift1
         /// <param name="salary">Salary of the user</param>
         /// <param name="username">Username of the user</param>
         /// <param name="password">Password of the user</param>
-        /// <returns>True if the user already exists otherwise it will return false.</returns>
-        public bool CreateUser(string title, int salary, string username, string password)
+        /// <returns>True if the user already exists otherwise it will return
+        /// false.</returns>
+        public bool CreateUser(string title, int salary, string username,
+            string password)
         {
             List<User> tmp = logic.DeserializeData(filePath + "/users.json");
 

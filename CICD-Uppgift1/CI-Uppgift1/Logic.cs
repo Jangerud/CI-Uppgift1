@@ -9,40 +9,13 @@ namespace CI_Uppgift1
 {
     public class Logic
     {
-
         /// <summary>
-        /// String variable that is made to keep the filepath for the employees that are created.
+        /// String variable that is made to keep the filepath for the employees
+        /// that are created.
         /// </summary>
         /// <returns></returns>
-        public string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
-        /// <summary>
-        /// This method will create a json file with the users.
-        /// </summary>
-        /// <param name="userinfo">This contains the information about the user needed.</param>
-        public void CreateUser(User userinfo)
-        {
-            try
-            {
-                // Create the file, or overwrite if the file exists.
-                using (FileStream fs = File.Create($"{filePath}/{userinfo.Username}"))
-                {
-                    // Declaring 'info' with all the user information from the variable 'userinfo'.
-                    byte[] info = new UTF8Encoding(true).GetBytes($"{userinfo.Title}, {userinfo.Salary}, {userinfo.Username}, {userinfo.Password}, {userinfo.IsAdmin}");
-                    // Add some information to the file.
-                    fs.Write(info, 0, info.Length);
-
-                    Console.WriteLine("User created successfully!");
-                    Console.ReadKey();
-                }
-            }
-
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-
-        }
+        public string filePath = Environment.GetFolderPath(
+            Environment.SpecialFolder.MyDocuments);
 
         /// <summary>
         /// This method will get the information about the specific user.
@@ -52,7 +25,8 @@ namespace CI_Uppgift1
         {
             try
             {
-                // Checking which document to open, by putting together the filepath with the username.
+                // Checking which document to open, by putting together the
+                // filepath with the username.
                 using (StreamReader sr = File.OpenText($"{filePath}/{user}"))
                 {
                     string s = "";
@@ -68,14 +42,9 @@ namespace CI_Uppgift1
                 Console.WriteLine(e.ToString());
                 Console.ReadKey();
             }
-
         }
 
-        /// <summary>
-        /// This method creates a json file with the users information.
-        /// </summary>
-        /// <param name="list">List of employees.</param>
-        /// <param name="filepath">Filepath to the file.</param>
+
         public void SerializeData(List<User> list, string filepath)
         {
             var options = new JsonSerializerOptions { WriteIndented = true };
@@ -85,7 +54,8 @@ namespace CI_Uppgift1
         }
 
         /// <summary>
-        /// DeserializeData(string user) makes it possible to read a json file of a user and returns the appropiate user information as an object.
+        /// DeserializeData(string user) makes it possible to read a json file
+        /// of a user and returns the appropiate user information as an object.
         /// </summary>
         /// <param name="filepath">The filepath.</param>
         /// <returns>A List of employees.</returns>
@@ -97,11 +67,11 @@ namespace CI_Uppgift1
             return list;
         }
 
-
         /// <summary>
         /// Method that will create a list of employees.
         /// </summary>
-        /// <param name="userslist">The list of users that needs to be added.</param>
+        /// <param name="userslist">The list of users that needs to be added.
+        /// </param>
         /// <returns>A list of employees.</returns>
         public List<IAccount> CreateEmployeeList(List<User> userslist)
         {
@@ -110,18 +80,18 @@ namespace CI_Uppgift1
             {
                 if (item.IsAdmin)
                 {
-                    employeeList.Add(new Admin(item.Title, item.Salary, item.Username, item.Password, item.IsAdmin));
+                    employeeList.Add(new Admin(item.Title, item.Salary,
+                        item.Username, item.Password, item.IsAdmin));
                 }
                 else
                 {
-                    employeeList.Add(new User(item.Title, item.Salary, item.Username, item.Password, item.IsAdmin));
+                    employeeList.Add(new User(item.Title, item.Salary,
+                        item.Username, item.Password, item.IsAdmin));
                 }
-
             }
 
             return employeeList;
         }
-
 
         /// <summary>
         /// Method that creates dummy data.
@@ -129,7 +99,9 @@ namespace CI_Uppgift1
         /// <returns>Returns the list of dummy data.</returns>
         public List<User> CreateDummyData()
         {
-            List<User> users = new() { new User("test", 12000, "user1", "123", false), new User("Admin", 22000, "admin1", "admin1234", true) };
+            List<User> users = new() {
+                new User("test", 12000, "user1", "123", false),
+                new User("Admin", 22000, "admin1", "admin1234", true) };
 
             return users;
         }
@@ -169,8 +141,7 @@ namespace CI_Uppgift1
                 return user.Password == password;
             }
 
-            if (!CheckPassword()) return false;
-            return true;
+            return CheckPassword();
         }
 
         /// <summary>
