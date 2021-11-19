@@ -9,7 +9,6 @@ namespace CI_Uppgift1
 {
     public class Logic
     {
-
         /// <summary>
         /// String variable that is made to keep the filepath for the employees
         /// that are created.
@@ -43,14 +42,8 @@ namespace CI_Uppgift1
                 Console.WriteLine(e.ToString());
                 Console.ReadKey();
             }
-
         }
 
-        /// <summary>
-        /// This method creates a json file with the users information.
-        /// </summary>
-        /// <param name="list">List of employees.</param>
-        /// <param name="filepath">Filepath to the file.</param>
         public void SerializeData(List<User> list, string filepath)
         {
             var options = new JsonSerializerOptions { WriteIndented = true };
@@ -73,7 +66,6 @@ namespace CI_Uppgift1
             return list;
         }
 
-
         /// <summary>
         /// Method that will create a list of employees.
         /// </summary>
@@ -95,12 +87,10 @@ namespace CI_Uppgift1
                     employeeList.Add(new User(item.Title, item.Salary,
                         item.Username, item.Password, item.IsAdmin));
                 }
-
             }
 
             return employeeList;
         }
-
 
         /// <summary>
         /// Method that creates dummy data.
@@ -150,8 +140,7 @@ namespace CI_Uppgift1
                 return user.Password == password;
             }
 
-            if (!CheckPassword()) return false;
-            return true;
+            return CheckPassword();
         }
 
         /// <summary>

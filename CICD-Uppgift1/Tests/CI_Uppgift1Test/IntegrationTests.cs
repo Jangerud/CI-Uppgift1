@@ -10,7 +10,6 @@ namespace CI_Uppgift1Test
     {
         private Logic logic;
         private Admin admin;
-        private CreateUserTests ct;
         private string filePath;
 
         [TestInitialize]
