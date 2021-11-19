@@ -2,7 +2,6 @@ namespace CI_Uppgift1.Interfaces
 {
     public interface IAccount
     {
-Development
         /// <summary>
         /// Property for the salary of the user.
         /// </summary>
