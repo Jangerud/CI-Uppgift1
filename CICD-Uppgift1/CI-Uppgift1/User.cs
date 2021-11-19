@@ -1,6 +1,5 @@
 namespace CI_Uppgift1
 {
-Development
     /// <summary>
     /// Constructor of the User class.
     /// </summary>
@@ -18,7 +17,6 @@ Development
 
         }
 
-Development
         public User(string title, int salary, string username, string password,
             bool isadmin = false)
         {
@@ -28,6 +26,5 @@ Development
             this.Password = password;
             this.IsAdmin = isadmin;
         }
-Development
     }
 }

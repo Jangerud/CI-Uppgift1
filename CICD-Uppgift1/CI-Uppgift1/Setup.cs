@@ -17,7 +17,6 @@ namespace CI_Uppgift1
         private List<User> _users;
 
         /// <summary>
-Development
         /// Method that handles the program, it will first run FirstTimeRun to
         /// fill data and create the file. Then run the LoginScreen.
         /// Then depending on the users priviledges, it will start the
@@ -206,7 +205,6 @@ Development
                     title = _users[i].Title;
                 }
             }
-Development
             List<string> options = new List<string> {
                 "Check Salary", "Check Role", "Check Active Users",
                 "Create New User", "Remove Account", "Logout" };
@@ -222,7 +220,6 @@ Development
                         Console.WriteLine($"Your current salary is: {salary}");
                         break;
                     case 2:
-Development
                         Console.WriteLine(
                             $"Your title in the company: {title}");
                         break;
@@ -244,7 +241,6 @@ Development
                         string newTitle = Console.ReadLine();
                         Console.WriteLine("Salary: ");
                         int.TryParse(Console.ReadLine(), out int newSalary);
-Development
                         admin.CreateUser(
                             newTitle, newSalary, newUsername, newPassword);
                         break;
@@ -270,7 +266,6 @@ Development
                             }
                             Console.WriteLine("User has been removed!");
                         }
-Development
                         Console.WriteLine("Please check if the username " +
                             "or password was correct!");
                         break;

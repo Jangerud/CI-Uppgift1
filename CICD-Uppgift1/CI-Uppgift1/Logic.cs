@@ -9,7 +9,6 @@ namespace CI_Uppgift1
 {
     public class Logic
     {
-Development
         /// <summary>
         /// String variable that is made to keep the filepath for the employees
         /// that are created.
@@ -26,7 +25,6 @@ Development
         {
             try
             {
-Development
                 // Checking which document to open, by putting together the
                 // filepath with the username.
                 using (StreamReader sr = File.OpenText($"{filePath}/{user}"))
@@ -44,7 +42,6 @@ Development
                 Console.WriteLine(e.ToString());
                 Console.ReadKey();
             }
-Development
         }
 
 
@@ -57,7 +54,6 @@ Development
         }
 
         /// <summary>
-Development
         /// DeserializeData(string user) makes it possible to read a json file
         /// of a user and returns the appropiate user information as an object.
         /// </summary>
@@ -71,7 +67,6 @@ Development
             return list;
         }
 
-Development
         /// <summary>
         /// Method that will create a list of employees.
         /// </summary>
@@ -85,7 +80,6 @@ Development
             {
                 if (item.IsAdmin)
                 {
-Development
                     employeeList.Add(new Admin(item.Title, item.Salary,
                         item.Username, item.Password, item.IsAdmin));
                 }
@@ -99,14 +93,12 @@ Development
             return employeeList;
         }
 
-Development
         /// <summary>
         /// Method that creates dummy data.
         /// </summary>
         /// <returns>Returns the list of dummy data.</returns>
         public List<User> CreateDummyData()
         {
-Development
             List<User> users = new() {
                 new User("test", 12000, "user1", "123", false),
                 new User("Admin", 22000, "admin1", "admin1234", true) };
@@ -149,7 +141,6 @@ Development
                 return user.Password == password;
             }
 
-Development
             return CheckPassword();
         }
 
