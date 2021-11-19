@@ -4,6 +4,7 @@ using CI_Uppgift1.Interfaces;
 
 namespace CI_Uppgift1
 {
+Development
     /// <summary>
     /// Constructor of the Admin class.
     /// </summary>
@@ -11,6 +12,7 @@ namespace CI_Uppgift1
     {
         new Logic logic = new();
 
+Development
         string filePath = Environment.GetFolderPath(
             Environment.SpecialFolder.MyDocuments);
 
@@ -27,6 +29,7 @@ namespace CI_Uppgift1
 
         }
 
+Development
         public Admin(string title, int salary, string username, string password,
             bool isadmin = true)
         {
@@ -45,6 +48,7 @@ namespace CI_Uppgift1
         /// <param name="salary">Salary of the user</param>
         /// <param name="username">Username of the user</param>
         /// <param name="password">Password of the user</param>
+Development
         /// <returns>True if the user already exists otherwise it will return
         /// false.</returns>
         public bool CreateUser(string title, int salary, string username,

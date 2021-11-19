@@ -9,6 +9,7 @@ namespace CI_Uppgift1
 {
     public class Logic
     {
+Development
         /// <summary>
         /// String variable that is made to keep the filepath for the employees
         /// that are created.
@@ -25,6 +26,7 @@ namespace CI_Uppgift1
         {
             try
             {
+Development
                 // Checking which document to open, by putting together the
                 // filepath with the username.
                 using (StreamReader sr = File.OpenText($"{filePath}/{user}"))
@@ -42,7 +44,9 @@ namespace CI_Uppgift1
                 Console.WriteLine(e.ToString());
                 Console.ReadKey();
             }
+Development
         }
+
 
         public void SerializeData(List<User> list, string filepath)
         {
@@ -53,6 +57,7 @@ namespace CI_Uppgift1
         }
 
         /// <summary>
+Development
         /// DeserializeData(string user) makes it possible to read a json file
         /// of a user and returns the appropiate user information as an object.
         /// </summary>
@@ -66,6 +71,7 @@ namespace CI_Uppgift1
             return list;
         }
 
+Development
         /// <summary>
         /// Method that will create a list of employees.
         /// </summary>
@@ -79,6 +85,7 @@ namespace CI_Uppgift1
             {
                 if (item.IsAdmin)
                 {
+Development
                     employeeList.Add(new Admin(item.Title, item.Salary,
                         item.Username, item.Password, item.IsAdmin));
                 }
@@ -92,12 +99,14 @@ namespace CI_Uppgift1
             return employeeList;
         }
 
+Development
         /// <summary>
         /// Method that creates dummy data.
         /// </summary>
         /// <returns>Returns the list of dummy data.</returns>
         public List<User> CreateDummyData()
         {
+Development
             List<User> users = new() {
                 new User("test", 12000, "user1", "123", false),
                 new User("Admin", 22000, "admin1", "admin1234", true) };
@@ -140,6 +149,7 @@ namespace CI_Uppgift1
                 return user.Password == password;
             }
 
+Development
             return CheckPassword();
         }
 
